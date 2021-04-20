@@ -1,13 +1,16 @@
-'use strict';
+"use strict";
 /*-----read from json file---- */
 let My_array = [];
+let toPush = [];
 function Image(url, title, description, keyword, horns) {
   this.title = title;
   this.img = url;
   this.description = description;
   this.keyword = keyword;
   this.horns = horns;
+  toPush.push(this);
 }
+console.log(toPush);
 
 Image.prototype.render = function () {
   let $photo = $(
@@ -17,16 +20,16 @@ Image.prototype.render = function () {
   $photo.append($(`<h2>${this.title}</h2>`));
   $photo.append($(`<img src=${this.img}></img>`));
   $photo.append($(`<p>${this.description}</p>`));
-  $('main').append($photo);
+  $("main").append($photo);
 };
 
 Image.readJson = () => {
   const ajaxSetting = {
-    method: 'get',
-    datatype: 'json',
+    method: "get",
+    datatype: "json",
   };
 
-  $.ajax('data/page-1.json', ajaxSetting).then(doStuff);
+  $.ajax("data/page-1.json", ajaxSetting).then(doStuff);
 };
 
 function doStuff(data) {
@@ -40,19 +43,19 @@ function doStuff(data) {
 $(() => Image.readJson());
 /*--------------filter----------------*/
 function filterr() {
-  $('select').on('change', filterFunction);
+  $("select").on("change", filterFunction);
 
   My_array.forEach((item, i) => {
-    let $keyword = $('.option').clone();
+    let $keyword = $(".option").clone();
     $keyword.text(item);
-    $('select').append($keyword);
-    $keyword.attr('id', i);
-    $keyword.attr('value', item);
-    $keyword.removeClass('option');
+    $("select").append($keyword);
+    $keyword.attr("id", i);
+    $keyword.attr("value", item);
+    $keyword.removeClass("option");
   });
 }
 function filterFunction() {
-  let select = $(this).children('option:selected').val();
-  $('main').children().addClass('hide');
-  $(`.${select}`).removeClass('hide');
+  let select = $(this).children("option:selected").val();
+  $("main").children().addClass("hide");
+  $(`.${select}`).removeClass("hide");
 }
