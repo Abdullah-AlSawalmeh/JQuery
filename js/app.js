@@ -2,6 +2,7 @@
 /*-----read from json file---- */
 let keyWords = [];
 let dataArray = [];
+let selectedFilter = 0;
 function Image(item) {
   this.title = item.title;
   this.image_url = item.image_url;
@@ -37,6 +38,7 @@ readJson(1);
 
 function doStuff(HornData) {
   keyWords = [];
+  sort(HornData);
   // console.log(dataArray);
   HornData.forEach((item) => {
     let newImage = new Image(item);
@@ -66,11 +68,14 @@ function renderKeywords() {
 // events functions
 function filterFunction() {
   let select = $(this).val();
+  // selectedFilter.push(select);
+  selectedFilter = select;
+
   // if (select == "default") {
   //   $("div").show();
   // } else {
-
   // }
+
   $("div").hide();
   $(`.${select}`).show();
 }
@@ -118,10 +123,29 @@ function sortHandler() {
       }
     });
   }
+  // console.log(dataArray);
   $("#images_section_main").children().remove();
   dataArray.forEach((element) => {
     element.render();
   });
+  if (selectedFilter) {
+    $("div").hide();
+    console.log(selectedFilter);
+    $(`.${selectedFilter}`).show();
+  }
 }
 
 $("#sort").on("change", sortHandler);
+
+function sort(dataArray) {
+  dataArray.sort((a, b) => {
+    let aTitle = a.title;
+    let bTitle = b.title;
+    if (aTitle < bTitle) {
+      return -1;
+    }
+    if (aTitle > bTitle) {
+      return 1;
+    }
+  });
+}
