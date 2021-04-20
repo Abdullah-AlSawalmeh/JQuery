@@ -1,0 +1,29 @@
+header h1,
+select {
+  float: left;
+  margin-top: 40px;
+}
+header h1 {
+  margin-left: 500px;
+  font-size: 60px;
+}
+header select {
+  float: right;
+  margin-right: 70px;
+}
+
+#photo-template {
+  width: 30%;
+  height: 300px;
+  float: left;
+  margin: 30px 1.5%;
+  text-align: center;
+}
+#photo-template img {
+  width: 60%;
+  height: 200px;
+  border: 7px ridge rgb(201, 198, 198);
+  border-radius: 20%;
+}
+
+

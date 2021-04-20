@@ -18,7 +18,8 @@ Image.prototype.render = function () {
     src: this.image_url,
     alt: this.title,
   });
-  hornClone.attr("class", this.keyword);
+  hornClone.attr("class", `${this.keyword}`);
+  hornClone.attr("id", "photo-template");
   $("main").append(hornClone);
 };
 
