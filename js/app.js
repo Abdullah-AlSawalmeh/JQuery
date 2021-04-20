@@ -11,16 +11,19 @@ function Image(item) {
 }
 
 Image.prototype.render = function () {
-  let hornClone = $(".photo-template").clone();
-  hornClone.find("h2").text(this.title);
-  hornClone.find("p").text(this.description);
-  hornClone.find("img").attr({
-    src: this.image_url,
-    alt: this.title,
-  });
-  hornClone.attr("class", `${this.keyword}`);
-  hornClone.attr("id", "photo-template");
-  $("main").append(hornClone);
+  // let hornClone = $(".photo-template").clone();
+  // hornClone.find("h2").text(this.title);
+  // hornClone.find("p").text(this.description);
+  // hornClone.find("img").attr({
+  //   src: this.image_url,
+  //   alt: this.title,
+  // });
+  // hornClone.attr("class", `${this.keyword}`);
+  // hornClone.attr("id", "photo-template");
+  // $("main").append(hornClone);
+  let template = $("#imageTemplate").html();
+  let imageMergedTemplate = Mustache.render(template, this);
+  $("main").append(imageMergedTemplate);
 };
 
 function readJson() {
@@ -35,11 +38,22 @@ function readJson() {
 readJson();
 
 function doStuff(HornData) {
+  // HornData.forEach((item) => {
+  //   let newImage = new Image(item);
+  //   newImage.render();
+
   HornData.forEach((item) => {
+    // console.log(neighborhoodObject);
     let newImage = new Image(item);
     newImage.render();
-    if (!keyWords.includes(newImage.keyword)) keyWords.push(newImage.keyword);
+
+    if (!keyWords.includes(newImage.keyword)) {
+      keyWords.push(newImage.keyword);
+    }
   });
+
+  // if (!keyWords.includes(newImage.keyword)) keyWords.push(newImage.keyword);
+  console.log(keyWords);
   $(".photo-template").first().remove();
   renderKeywords();
 }
