@@ -146,3 +146,7 @@ function sort(dataArray) {
     }
   });
 }
+
+$(".heading").click(function (params) {
+  location.reload();
+});

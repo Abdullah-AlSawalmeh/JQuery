@@ -1,10 +1,11 @@
 header {
   display: flex;
-  margin-top: 20px;
-  padding: 20px 0;
+  /* margin-top: 20px; */
+  padding: 40px 0;
   /* height: 100px; */
   justify-content: space-evenly;
   align-items: flex-end;
+  background-color: gray;
 }
 
 body {
@@ -26,4 +27,5 @@ footer {
   text-align: center;
   padding-top: 20px;
   font-size: 40px;
+  background-color: gray;
 }

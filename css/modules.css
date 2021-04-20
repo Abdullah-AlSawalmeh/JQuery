@@ -5,13 +5,14 @@ header h1,
 } */
 header h1 {
   font-size: 60px;
+  cursor: pointer;
 }
 header select,
 header button {
   padding: 5px 15px;
 }
 button {
-  background-color: rgb(111, 107, 161);
+  background-color: rgb(143, 142, 158);
   color: aliceblue;
   border: none;
   font-size: 20px;
@@ -21,16 +22,22 @@ button {
 #images_section_main {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 #photo-template {
-  width: 30%;
-  /* height: 300px; */
+  width: 27%;
   margin: 30px 1.5%;
   text-align: center;
+  border: 3px solid #ddd;
+  padding: 10px;
+  box-shadow: 20px 20px 10px gray;
+}
+#photo-template h2 {
+  font-size: 20px;
+  font-weight: bold;
 }
 #photo-template img {
   width: 60%;
   height: 200px;
-  border: 7px ridge rgb(201, 198, 198);
-  border-radius: 20%;
+  margin: 30px 0px;
 }
