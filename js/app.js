@@ -1,7 +1,6 @@
 "use strict";
 /*-----read from json file---- */
 let keyWords = [];
-
 function Image(item) {
   this.title = item.title;
   this.image_url = item.image_url;
@@ -13,21 +12,33 @@ function Image(item) {
 Image.prototype.render = function () {
   let template = $("#imageTemplate").html();
   let imageMergedTemplate = Mustache.render(template, this);
-  $("main").append(imageMergedTemplate);
+  // console.log(this);
+  $("#images_section_main").append(imageMergedTemplate);
 };
 
-function readJson() {
+function readJson(number) {
   const ajaxSetting = {
     method: "get",
     datatype: "json",
   };
-
-  $.ajax("data/page-1.json", ajaxSetting).then(doStuff);
+  if (number === 1) {
+    $("#images_section_main").children().remove();
+    $.ajax(`data/page-1.json`, ajaxSetting).then(doStuff);
+  }
+  if (number === 2) {
+    $("#images_section_main").children().remove();
+    $.ajax(`data/page-2.json`, ajaxSetting).then(doStuff);
+  }
+  // if (number === 5) {
+  //   // $.ajax(`data/page-1.json`, ajaxSetting).then(doStuff);
+  //   $("#images_section_main").children().remove();
+  //   $.ajax(`data/page-1.json`, ajaxSetting).then(doStuff);
+  // }
 }
-
-readJson();
+readJson(1);
 
 function doStuff(HornData) {
+  keyWords = [];
   HornData.forEach((item) => {
     let newImage = new Image(item);
     newImage.render();
@@ -37,19 +48,18 @@ function doStuff(HornData) {
     }
   });
 
-  console.log(keyWords);
-  $(".photo-template").first().remove();
   renderKeywords();
 }
 
 /*--------------filter----------------*/
 function renderKeywords() {
+  $("#filter").children().remove();
+
   keyWords.forEach((item) => {
-    let $keyword = $(".option").clone();
-    $keyword.text(item);
-    $("select").append($keyword);
-    $keyword.attr("value", item);
-    $keyword.removeClass("option");
+    let x = { y: item };
+    let template = $("#filterTemplate").html();
+    let filterMergedTemplate = Mustache.render(template, x);
+    $("#filter").append(filterMergedTemplate);
   });
 }
 
@@ -66,3 +76,15 @@ function filterFunction() {
 
 // events
 $("select").on("change", filterFunction);
+
+///////// buttons
+
+function page1Handler() {
+  readJson(1);
+}
+function page2Handler() {
+  readJson(2);
+}
+
+$("#page1").click(page1Handler);
+$("#page2").on("click", page2Handler);
