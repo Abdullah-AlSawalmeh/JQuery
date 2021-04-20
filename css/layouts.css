@@ -1,10 +1,22 @@
 header {
-  height: 100px;
+  display: flex;
+  margin-top: 20px;
+  padding: 20px 0;
+  /* height: 100px; */
+  justify-content: space-evenly;
+  align-items: flex-end;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: "Indie Flower", cursive;
+}
 main {
   width: 80%;
   margin: 80px auto;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 footer {
