@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
 
 * {
   margin: 0;
-  padding: 0;
-  font-family: 'Indie Flower', cursive;
+  padding: 0 0 0 0;
+  font-family: "Indie Flower", cursive;
 }
 
 /*----start header----*/
@@ -30,7 +30,7 @@ main {
   width: 80%;
   margin: 80px auto;
 }
-#photo-template {
+.photo-template {
   width: 30%;
   height: 300px;
   float: left;
