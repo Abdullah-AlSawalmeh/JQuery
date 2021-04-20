@@ -1,18 +1,19 @@
 "use strict";
 /*-----read from json file---- */
 let keyWords = [];
+let dataArray = [];
 function Image(item) {
   this.title = item.title;
   this.image_url = item.image_url;
   this.description = item.description;
   this.keyword = item.keyword;
   this.horns = item.horns;
+  dataArray.push(this);
 }
 
 Image.prototype.render = function () {
   let template = $("#imageTemplate").html();
   let imageMergedTemplate = Mustache.render(template, this);
-  // console.log(this);
   $("#images_section_main").append(imageMergedTemplate);
 };
 
@@ -22,23 +23,21 @@ function readJson(number) {
     datatype: "json",
   };
   if (number === 1) {
+    dataArray = [];
     $("#images_section_main").children().remove();
     $.ajax(`data/page-1.json`, ajaxSetting).then(doStuff);
   }
   if (number === 2) {
+    dataArray = [];
     $("#images_section_main").children().remove();
     $.ajax(`data/page-2.json`, ajaxSetting).then(doStuff);
   }
-  // if (number === 5) {
-  //   // $.ajax(`data/page-1.json`, ajaxSetting).then(doStuff);
-  //   $("#images_section_main").children().remove();
-  //   $.ajax(`data/page-1.json`, ajaxSetting).then(doStuff);
-  // }
 }
 readJson(1);
 
 function doStuff(HornData) {
   keyWords = [];
+  // console.log(dataArray);
   HornData.forEach((item) => {
     let newImage = new Image(item);
     newImage.render();
@@ -49,6 +48,7 @@ function doStuff(HornData) {
   });
 
   renderKeywords();
+  // dataArray = [];
 }
 
 /*--------------filter----------------*/
@@ -66,16 +66,17 @@ function renderKeywords() {
 // events functions
 function filterFunction() {
   let select = $(this).val();
-  if (select == "default") {
-    $("div").show();
-  } else {
-    $("div").hide();
-    $(`.${select}`).show();
-  }
+  // if (select == "default") {
+  //   $("div").show();
+  // } else {
+
+  // }
+  $("div").hide();
+  $(`.${select}`).show();
 }
 
 // events
-$("select").on("change", filterFunction);
+$("#filter").on("change", filterFunction);
 
 ///////// buttons
 
@@ -88,3 +89,39 @@ function page2Handler() {
 
 $("#page1").click(page1Handler);
 $("#page2").on("click", page2Handler);
+
+//////////// sort
+
+function sortHandler() {
+  let select = $(this).val();
+  if (select === "title") {
+    dataArray.sort((a, b) => {
+      let aTitle = a.title;
+      let bTitle = b.title;
+      if (aTitle < bTitle) {
+        return -1;
+      }
+      if (aTitle > bTitle) {
+        return 1;
+      }
+    });
+  }
+  if (select === "horns") {
+    dataArray.sort((a, b) => {
+      let aHorns = a.horns;
+      let bHorns = b.horns;
+      if (aHorns < bHorns) {
+        return -1;
+      }
+      if (aHorns > bHorns) {
+        return 1;
+      }
+    });
+  }
+  $("#images_section_main").children().remove();
+  dataArray.forEach((element) => {
+    element.render();
+  });
+}
+
+$("#sort").on("change", sortHandler);
