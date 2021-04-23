@@ -48,7 +48,6 @@ function doStuff(HornData) {
       keyWords.push(newImage.keyword);
     }
   });
-
   renderKeywords();
 }
 
@@ -147,6 +146,17 @@ function sort(dataArray) {
   });
 }
 
-$(".heading").click(function (params) {
+$(".heading").click(function () {
   location.reload();
 });
+
+////////// Stretch goals
+
+$("#photo-template").on("click", imageHandler);
+
+function imageHandler() {
+  console.log("in the image ");
+}
+$(document).ready(function () {});
+// let y = document.getElementById("large_image_section");
+// y.addEventListener("click", imageHandler);

@@ -19,11 +19,7 @@ button {
   cursor: pointer;
   /* box-shadow: 5px 5px 5px #ddd; */
 }
-#images_section_main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
+
 #photo-template {
   width: 27%;
   margin: 30px 1.5%;
